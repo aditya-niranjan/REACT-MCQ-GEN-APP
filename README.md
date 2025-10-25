@@ -74,19 +74,26 @@ cd d:\MCQ-GENERATOR
 # Navigate to backend directory
 cd backend
 
+# Copy the example environment file
+copy .env.example .env
+
 # Install dependencies
 npm install
 
-# Configure environment variables
-# Edit .env file and add your Gemini API key
+# Edit .env and add your Gemini API key
 notepad .env
 ```
 
-**Update `.env` file:**
+**Update `.env` file with your actual API key:**
 ```
 PORT=5000
 GEMINI_API_KEY=your_actual_gemini_api_key_here
 ```
+
+**🔒 Security Note:** 
+- Never commit the `.env` file
+- It's already in `.gitignore`
+- Only commit `.env.example` (without real keys)
 
 #### 3. Frontend Setup
 
