@@ -1,0 +1,162 @@
+.mcq-list {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mcq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.mcq-header h2 {
+  color: #333;
+  font-size: 24px;
+  margin: 0;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.download-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.txt-btn {
+  background: #4CAF50;
+  color: white;
+}
+
+.txt-btn:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.pdf-btn {
+  background: #f44336;
+  color: white;
+}
+
+.pdf-btn:hover {
+  background: #da190b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.mcq-content {
+  line-height: 1.8;
+  color: #333;
+}
+
+.mcq-question {
+  font-size: 16px;
+  font-weight: 600;
+  color: #667eea;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.mcq-option {
+  font-size: 15px;
+  color: #555;
+  margin-left: 20px;
+  margin-bottom: 6px;
+  padding: 8px 12px;
+  background: #f8f9ff;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.mcq-option:hover {
+  background: #e8eaff;
+  transform: translateX(5px);
+}
+
+.mcq-answer {
+  font-size: 15px;
+  font-weight: 600;
+  color: #4CAF50;
+  margin-left: 20px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  background: #f1f8f4;
+  border-radius: 4px;
+  border-left: 3px solid #4CAF50;
+}
+
+.mcq-text {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .mcq-list {
+    padding: 20px;
+  }
+
+  .mcq-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mcq-header h2 {
+    font-size: 20px;
+  }
+
+  .download-buttons {
+    width: 100%;
+  }
+
+  .download-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .mcq-question {
+    font-size: 15px;
+  }
+
+  .mcq-option {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+  .mcq-answer {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+}
