@@ -1,15 +1,22 @@
 .mcq-list {
-  background: white;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease;
+  width: 100%;
+  max-width: 900px;
+  margin: 40px auto;
+  background: var(--card-bg-light);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  overflow: hidden;
+  animation: slideUp 0.6s ease-out;
 }
 
-@keyframes fadeIn {
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -21,120 +28,233 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid #f0f0f0;
+  padding: 32px 40px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(217, 70, 239, 0.15) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
 }
 
 .mcq-header h2 {
-  color: #333;
-  font-size: 24px;
   margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.success-icon {
+  font-size: 32px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .download-buttons {
   display: flex;
-  gap: 10px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .download-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 14px 28px;
+  font-size: 15px;
   font-weight: 600;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.download-btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .txt-btn {
-  background: #4CAF50;
+  background: var(--success-gradient);
   color: white;
 }
 
 .txt-btn:hover {
-  background: #45a049;
+  box-shadow:
+    0 8px 25px rgba(16, 185, 129, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .pdf-btn {
-  background: #f44336;
+  background: var(--danger-gradient);
   color: white;
 }
 
 .pdf-btn:hover {
-  background: #da190b;
+  box-shadow:
+    0 8px 25px rgba(239, 68, 68, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.download-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .mcq-content {
-  line-height: 1.8;
-  color: #333;
+  padding: 40px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.mcq-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.mcq-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.mcq-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.mcq-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7c3aed 0%, #c026d3 100%);
 }
 
 .mcq-question {
-  font-size: 16px;
-  font-weight: 600;
-  color: #667eea;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 32px 0 16px 0;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.12) 50%, rgba(217, 70, 239, 0.12) 100%);
+  border-left: 4px solid #6366f1;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.mcq-question:first-child {
+  margin-top: 0;
+}
+
+.mcq-question:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.18) 0%, rgba(139, 92, 246, 0.18) 50%, rgba(217, 70, 239, 0.18) 100%);
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
 }
 
 .mcq-option {
-  font-size: 15px;
-  color: #555;
-  margin-left: 20px;
-  margin-bottom: 6px;
-  padding: 8px 12px;
-  background: #f8f9ff;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin: 10px 0 10px 20px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .mcq-option:hover {
-  background: #e8eaff;
-  transform: translateX(5px);
+  background: rgba(99, 102, 241, 0.12);
+  border-color: #6366f1;
+  transform: translateX(8px);
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.15);
 }
 
 .mcq-answer {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #4CAF50;
-  margin-left: 20px;
-  margin-top: 8px;
-  margin-bottom: 15px;
-  padding: 8px 12px;
-  background: #f1f8f4;
-  border-radius: 4px;
-  border-left: 3px solid #4CAF50;
+  color: #10b981;
+  margin: 16px 0 24px 20px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+  border-left: 3px solid #10b981;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.answer-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--success-gradient);
+  border-radius: 50%;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.mcq-answer:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+  transform: translateX(4px);
 }
 
 .mcq-text {
   font-size: 15px;
-  color: #666;
-  margin-bottom: 8px;
+  color: var(--text-secondary);
+  margin: 8px 0;
+  line-height: 1.6;
+  padding-left: 20px;
+  opacity: 0.85;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
   .mcq-list {
-    padding: 20px;
+    margin: 20px;
+    border-radius: 16px;
   }
 
   .mcq-header {
     flex-direction: column;
     align-items: flex-start;
+    padding: 24px 24px;
   }
 
   .mcq-header h2 {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .download-buttons {
@@ -144,19 +264,53 @@
   .download-btn {
     flex: 1;
     justify-content: center;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .mcq-content {
+    padding: 24px;
+    max-height: 500px;
   }
 
   .mcq-question {
-    font-size: 15px;
+    font-size: 16px;
+    padding: 14px 16px;
+    margin: 24px 0 12px 0;
   }
 
   .mcq-option {
     font-size: 14px;
-    margin-left: 10px;
+    margin-left: 12px;
+    padding: 10px 14px;
   }
 
   .mcq-answer {
     font-size: 14px;
-    margin-left: 10px;
+    margin-left: 12px;
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mcq-header h2 {
+    font-size: 20px;
+  }
+
+  .success-icon {
+    font-size: 24px;
+  }
+
+  .download-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .download-btn {
+    width: 100%;
+  }
+
+  .mcq-content {
+    padding: 20px;
   }
 }

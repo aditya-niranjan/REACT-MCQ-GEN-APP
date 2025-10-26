@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { downloadAsTXT, downloadAsPDF } from '../services/api';
 import './MCQList.css';
 
@@ -21,6 +22,7 @@ const MCQList = ({ mcqs, filename }) => {
   const formatMCQs = (text) => {
     const lines = text.split('\n');
     const formattedLines = [];
+    let questionIndex = 0;
     
     lines.forEach((line, index) => {
       const trimmedLine = line.trim();
@@ -28,34 +30,60 @@ const MCQList = ({ mcqs, filename }) => {
 
       // Question line
       if (trimmedLine.match(/^Q\d+\./)) {
+        questionIndex++;
         formattedLines.push(
-          <div key={index} className="mcq-question">
+          <motion.div 
+            key={index} 
+            className="mcq-question"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: questionIndex * 0.1 }}
+          >
             {trimmedLine}
-          </div>
+          </motion.div>
         );
       }
       // Option lines
       else if (trimmedLine.match(/^[A-D]\)/)) {
         formattedLines.push(
-          <div key={index} className="mcq-option">
+          <motion.div 
+            key={index} 
+            className="mcq-option"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: questionIndex * 0.1 + 0.05 }}
+            whileHover={{ x: 5, backgroundColor: 'rgba(99, 102, 241, 0.1)' }}
+          >
             {trimmedLine}
-          </div>
+          </motion.div>
         );
       }
       // Answer line
       else if (trimmedLine.match(/^Answer:/)) {
         formattedLines.push(
-          <div key={index} className="mcq-answer">
-            {trimmedLine}
-          </div>
+          <motion.div 
+            key={index} 
+            className="mcq-answer"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: questionIndex * 0.1 + 0.1 }}
+          >
+            <span className="answer-label">✓</span> {trimmedLine}
+          </motion.div>
         );
       }
       // Other lines
       else {
         formattedLines.push(
-          <div key={index} className="mcq-text">
+          <motion.div 
+            key={index} 
+            className="mcq-text"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: questionIndex * 0.1 }}
+          >
             {trimmedLine}
-          </div>
+          </motion.div>
         );
       }
     });
@@ -64,23 +92,49 @@ const MCQList = ({ mcqs, filename }) => {
   };
 
   return (
-    <div className="mcq-list">
+    <motion.div 
+      className="mcq-list"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="mcq-header">
-        <h2>Generated MCQs</h2>
-        <div className="download-buttons">
-          <button onClick={handleDownloadTXT} className="download-btn txt-btn">
+        <motion.h2
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <span className="success-icon">✨</span> Generated MCQs
+        </motion.h2>
+        <motion.div 
+          className="download-buttons"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <motion.button 
+            onClick={handleDownloadTXT} 
+            className="download-btn txt-btn"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
             📝 Download as TXT
-          </button>
-          <button onClick={handleDownloadPDF} className="download-btn pdf-btn">
+          </motion.button>
+          <motion.button 
+            onClick={handleDownloadPDF} 
+            className="download-btn pdf-btn"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
             📄 Download as PDF
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
 
       <div className="mcq-content">
         {formatMCQs(mcqs)}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
