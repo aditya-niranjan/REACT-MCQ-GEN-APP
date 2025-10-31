@@ -145,7 +145,7 @@ const Home = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        <p>Powered by Google Gemini AI • Built with React & Node.js</p>
+        <p>Powered by Google Gemini AI • Built with React & Node.js By Adit!</p>
       </motion.footer>
     </div>
   );
