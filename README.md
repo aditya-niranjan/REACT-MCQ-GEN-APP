@@ -1,16 +1,25 @@
 # 📚 PDF to MCQ Generator
 
-A full-stack web application that generates Multiple Choice Questions (MCQs) from PDF documents using Google Gemini AI.
+A full-stack web application that generates Multiple Choice Questions (MCQs) from PDF documents using AI - supports both **Ollama (Local)** and **Google Gemini (Cloud)**.
 
 ## ✨ Features
 
 - 📄 **PDF Upload**: Drag & drop or browse to upload PDF files
 - 🔢 **Customizable Count**: Choose how many MCQs to generate (1-50 questions)
-- 🤖 **AI-Powered**: Uses Google Gemini 2.5 API to generate high-quality MCQs
+- 🤖 **Dual AI Support**: 
+  - **Primary**: Ollama (Local, Private, Free) - Mistral 7B
+  - **Fallback**: Google Gemini 2.5 Flash (Cloud, Fast)
+- 🎯 **Smart AI Detection**: Automatically uses best available service
+- 🔄 **Automatic Fallback**: Switches to backup AI if primary fails
+- 📊 **Service Visibility**: See which AI generated your MCQs
 - 📝 **Formatted Output**: MCQs in clean, standardized format
 - 💾 **Download Options**: Export MCQs as TXT or PDF
-- 🎨 **Modern UI**: Responsive, clean interface built with React
-- ⚡ **Optimized**: Text chunking for efficient API processing
+- 🎨 **Modern UI**: 
+  - Smooth animations with Framer Motion
+  - Dark/Light theme support
+  - Responsive design
+  - Beautiful glassmorphism effects
+- ⚡ **Optimized**: Text chunking for efficient processing
 - 🛡️ **Error Handling**: Comprehensive validation and error management
 
 ## 🏗️ Project Structure
@@ -56,9 +65,11 @@ MCQ-GENERATOR/
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- npm or yarn
-- Google Gemini API key ([Get it here]( `))
+- **Node.js** (v14 or higher)
+- **npm** or yarn
+- **Option 1 (Recommended)**: Ollama + Mistral 7B ([Download Ollama](https://ollama.com/download))
+- **Option 2**: Google Gemini API key ([Get it here](https://makersuite.google.com/app/apikey))
+- **Option 3**: Both (for automatic fallback)
 
 ### Installation
 
@@ -84,16 +95,37 @@ npm install
 notepad .env
 ```
 
-**Update `.env` file with your actual API key:**
-```
+**Update `.env` file with your configuration:**
+
+**Option 1: Ollama Only (Recommended - 100% Free & Private)**
+```properties
 PORT=5000
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=mistral:7b
+# GEMINI_API_KEY=  # Leave commented
+```
+
+**Option 2: Gemini Only (Cloud-based)**
+```properties
+PORT=5000
+# OLLAMA_BASE_URL=http://localhost:11434  # Comment out
+# OLLAMA_MODEL=mistral:7b
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+```
+
+**Option 3: Both (Ollama Primary + Gemini Fallback)**
+```properties
+PORT=5000
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=mistral:7b
 GEMINI_API_KEY=your_actual_gemini_api_key_here
 ```
 
 **🔒 Security Note:** 
-- Never commit the `.env` file
+- Never commit the `.env` file to GitHub
 - It's already in `.gitignore`
 - Only commit `.env.example` (without real keys)
+- Your API keys are sensitive - keep them private!
 
 #### 3. Frontend Setup
 
@@ -107,28 +139,57 @@ npm install
 
 ### 🎯 Running the Application
 
-#### Start Backend Server
+#### Option 1: Using Ollama (Local AI)
 
+**Terminal 1 - Start Ollama:**
 ```powershell
-# From backend directory
-cd d:\MCQ-GENERATOR\backend
-npm start
+# Install model (first time only)
+ollama pull mistral:7b
 
-# Or for development with auto-reload
-npm run dev
+# Start Ollama service
+ollama serve
 ```
 
+**Terminal 2 - Start Backend:**
+```powershell
+cd backend
+npm start
+```
 Backend will run on: `http://localhost:5000`
 
-#### Start Frontend
-
+**Terminal 3 - Start Frontend:**
 ```powershell
-# Open a new terminal and navigate to frontend
-cd d:\MCQ-GENERATOR\frontend
+cd frontend
+npm start
+```
+Frontend will run on: `http://localhost:3000`
+
+#### Option 2: Using Gemini Only
+
+**Terminal 1 - Start Backend:**
+```powershell
+cd backend
 npm start
 ```
 
-Frontend will run on: `http://localhost:3000`
+**Terminal 2 - Start Frontend:**
+```powershell
+cd frontend
+npm start
+```
+
+#### Verify Everything is Running
+
+```powershell
+# Check Ollama (if using)
+curl http://localhost:11434
+
+# Check Backend
+curl http://localhost:5000/health
+
+# Open Frontend in browser
+start http://localhost:3000
+```
 
 ## 📖 Usage
 
@@ -149,15 +210,24 @@ Frontend will run on: `http://localhost:3000`
 - **Express.js** - Web framework
 - **Multer** - File upload handling
 - **pdf-parse** - PDF text extraction
+- **Axios** - HTTP client for Ollama
 - **@google/generative-ai** - Google Gemini API integration
 - **dotenv** - Environment variable management
 - **cors** - Cross-origin resource sharing
 
 ### Frontend
-- **React.js** - UI library
+- **React.js 18** - UI library
+- **React Router** - Navigation
+- **Framer Motion** - Smooth animations
+- **Lenis** - Smooth scrolling
+- **Lucide React** - Beautiful icons
 - **Axios** - HTTP client
 - **jsPDF** - PDF generation
-- **CSS3** - Styling with animations
+- **CSS3** - Modern styling with themes
+
+### AI Services
+- **Ollama** - Local AI inference (Mistral 7B)
+- **Google Gemini 2.5 Flash** - Cloud AI service
 
 ## 📋 API Endpoints
 
