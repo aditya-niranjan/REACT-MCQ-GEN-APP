@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Download, CheckCircle2 } from 'lucide-react';
+import { FileText, Download, CheckCircle2, Cpu, Cloud } from 'lucide-react';
 import { downloadAsTXT, downloadAsPDF } from '../services/api';
 import './MCQList.css';
 
-const MCQList = ({ mcqs, filename }) => {
+const MCQList = ({ mcqs, filename, service, fallback }) => {
   const handleDownloadTXT = () => {
     const txtFilename = filename.replace('.pdf', '_mcqs.txt');
     downloadAsTXT(mcqs, txtFilename);
@@ -92,6 +92,30 @@ const MCQList = ({ mcqs, filename }) => {
     return formattedLines;
   };
 
+  // Get service info for display
+  const getServiceInfo = () => {
+    if (service === 'ollama') {
+      return {
+        name: 'Ollama',
+        icon: <Cpu size={18} />,
+        label: 'Local AI',
+        color: '#10b981',
+        className: 'service-ollama'
+      };
+    } else if (service === 'gemini') {
+      return {
+        name: 'Gemini',
+        icon: <Cloud size={18} />,
+        label: fallback ? 'Cloud AI (Fallback)' : 'Cloud AI',
+        color: '#6366f1',
+        className: 'service-gemini'
+      };
+    }
+    return null;
+  };
+
+  const serviceInfo = getServiceInfo();
+
   return (
     <motion.div 
       className="mcq-list"
@@ -131,6 +155,22 @@ const MCQList = ({ mcqs, filename }) => {
           </motion.button>
         </motion.div>
       </div>
+
+      {/* AI Service Badge */}
+      {serviceInfo && (
+        <motion.div 
+          className={`ai-service-badge ${serviceInfo.className}`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          {serviceInfo.icon}
+          <span className="service-text">
+            Generated using <strong>{serviceInfo.name}</strong> • {serviceInfo.label}
+          </span>
+          {fallback && <span className="fallback-tag">⚠️ Fallback Mode</span>}
+        </motion.div>
+      )}
 
       <div className="mcq-content">
         {formatMCQs(mcqs)}

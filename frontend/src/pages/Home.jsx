@@ -8,6 +8,8 @@ import './Home.css';
 const Home = () => {
   const [mcqs, setMcqs] = useState('');
   const [filename, setFilename] = useState('');
+  const [service, setService] = useState('');
+  const [fallback, setFallback] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -15,6 +17,8 @@ const Home = () => {
     setIsLoading(true);
     setError('');
     setMcqs('');
+    setService('');
+    setFallback(false);
 
     try {
       const response = await generateMCQsFromPDF(file, count);
@@ -22,6 +26,8 @@ const Home = () => {
       if (response.success) {
         setMcqs(response.mcqs);
         setFilename(response.filename);
+        setService(response.service);
+        setFallback(response.fallback || false);
       } else {
         setError(response.error || 'Failed to generate MCQs');
       }
@@ -134,7 +140,7 @@ const Home = () => {
         )}
 
         {mcqs && !isLoading && (
-          <MCQList mcqs={mcqs} filename={filename} />
+          <MCQList mcqs={mcqs} filename={filename} service={service} fallback={fallback} />
         )}
       </main>
 

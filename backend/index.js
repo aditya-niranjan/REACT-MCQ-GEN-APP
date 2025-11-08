@@ -20,6 +20,17 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'PDF to MCQ Generator API is running' });
 });
 
+// AI service status endpoint
+app.get('/api/status', async (req, res) => {
+  try {
+    const { getServiceStatus } = require('./services/smartAIService');
+    const status = await getServiceStatus();
+    res.json({ success: true, ...status });
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err);

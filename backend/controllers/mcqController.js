@@ -1,5 +1,5 @@
 const { extractTextFromPDF, chunkText } = require('../utils/pdfExtract');
-const { generateMCQs, generateMCQsFromChunks } = require('../services/geminiService');
+const { generateMCQs, generateMCQsFromChunks } = require('../services/smartAIService');
 
 /**
  * Handle PDF upload and MCQ generation
@@ -56,19 +56,21 @@ async function uploadAndGenerateMCQs(req, res) {
     console.log('Text divided into', chunks.length, 'chunk(s)');
 
     // Generate MCQs
-    let mcqs;
+    let result;
     if (chunks.length === 1) {
-      mcqs = await generateMCQs(chunks[0], questionCount);
+      result = await generateMCQs(chunks[0], questionCount);
     } else {
-      mcqs = await generateMCQsFromChunks(chunks, questionCount);
+      result = await generateMCQsFromChunks(chunks, questionCount);
     }
 
     console.log('MCQs generated successfully');
 
-    // Return success response
+    // Return success response with service info
     res.json({
       success: true,
-      mcqs: mcqs,
+      mcqs: result.mcqs,
+      service: result.service,
+      fallback: result.fallback || false,
       filename: req.file.originalname,
       count: questionCount
     });
