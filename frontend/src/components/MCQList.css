@@ -2,13 +2,11 @@
   width: 100%;
   max-width: 900px;
   margin: 40px auto;
-  background: var(--card-bg-light);
+  background: var(--card-bg);
   backdrop-filter: blur(20px);
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-2xl);
   overflow: hidden;
   animation: slideUp 0.6s ease-out;
 }
@@ -182,11 +180,11 @@
   color: var(--text-secondary);
   margin: 10px 0 10px 20px;
   padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-secondary);
   border-radius: 10px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
 }
 
 .mcq-option:hover {

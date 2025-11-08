@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FileText, Download, CheckCircle2 } from 'lucide-react';
 import { downloadAsTXT, downloadAsPDF } from '../services/api';
 import './MCQList.css';
 
@@ -104,7 +105,7 @@ const MCQList = ({ mcqs, filename }) => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <span className="success-icon">✨</span> Generated MCQs
+          <CheckCircle2 size={32} className="success-icon" color="#10b981" /> Generated MCQs
         </motion.h2>
         <motion.div 
           className="download-buttons"
@@ -118,7 +119,7 @@ const MCQList = ({ mcqs, filename }) => {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            📝 Download as TXT
+            <FileText size={20} /> Download as TXT
           </motion.button>
           <motion.button 
             onClick={handleDownloadPDF} 
@@ -126,7 +127,7 @@ const MCQList = ({ mcqs, filename }) => {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            📄 Download as PDF
+            <Download size={20} /> Download as PDF
           </motion.button>
         </motion.div>
       </div>

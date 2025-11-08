@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Upload, FileText, Plus, Minus, Sparkles } from 'lucide-react';
 import './UploadBox.css';
 
 const UploadBox = ({ onFileUpload, isLoading }) => {
@@ -94,7 +95,11 @@ const UploadBox = ({ onFileUpload, isLoading }) => {
           } : {}}
           transition={{ duration: 0.5 }}
         >
-          📄
+          {selectedFile ? (
+            <FileText size={64} color="#6366f1" />
+          ) : (
+            <Upload size={64} color="#6366f1" />
+          )}
         </motion.div>
         
         <AnimatePresence mode="wait">
@@ -149,7 +154,7 @@ const UploadBox = ({ onFileUpload, isLoading }) => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                -
+                <Minus size={24} />
               </motion.button>
               <input
                 id="questionCount"
@@ -169,7 +174,7 @@ const UploadBox = ({ onFileUpload, isLoading }) => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                +
+                <Plus size={24} />
               </motion.button>
             </div>
             <p className="count-hint">Min: 1, Max: 50 questions</p>
@@ -202,10 +207,11 @@ const UploadBox = ({ onFileUpload, isLoading }) => {
             ) : (
               <>
                 <motion.span
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  style={{ display: 'inline-flex' }}
                 >
-                  ✨
+                  <Sparkles size={20} />
                 </motion.span>
                 Generate MCQs
               </>

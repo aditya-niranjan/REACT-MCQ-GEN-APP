@@ -1,15 +1,14 @@
 .upload-box {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 32px;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-2xl);
   margin-bottom: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .upload-box::before {
@@ -81,7 +80,7 @@
 
 .upload-text .main-text {
   font-size: 18px;
-  color: #e2e8f0;
+  color: var(--text-primary);
   margin-bottom: 10px;
   font-weight: 600;
   position: relative;
@@ -90,7 +89,7 @@
 
 .upload-text .sub-text {
   font-size: 14px;
-  color: #94a3b8;
+  color: var(--text-secondary);
   position: relative;
   z-index: 1;
 }
@@ -103,7 +102,7 @@
 
 .file-name {
   font-size: 17px;
-  color: #e2e8f0;
+  color: var(--text-primary);
   font-weight: 600;
   margin-bottom: 8px;
   word-break: break-word;
@@ -111,7 +110,7 @@
 
 .file-size {
   font-size: 14px;
-  color: #94a3b8;
+  color: var(--text-secondary);
   background: rgba(99, 102, 241, 0.2);
   padding: 4px 12px;
   border-radius: 12px;
@@ -121,9 +120,9 @@
 .question-count-section {
   margin-top: 28px;
   padding: 24px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-secondary);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   overflow: hidden;
 }
 
@@ -131,7 +130,7 @@
   display: block;
   font-size: 16px;
   font-weight: 600;
-  color: #e2e8f0;
+  color: var(--text-primary);
   margin-bottom: 16px;
   text-align: center;
 }
@@ -196,8 +195,8 @@
   border-radius: 12px;
   outline: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  background: var(--card-bg);
+  color: var(--text-primary);
 }
 
 .question-count-input:focus {

@@ -4,22 +4,69 @@
   box-sizing: border-box;
 }
 
-:root {
+/* Light Theme (Default) */
+:root,
+[data-theme="light"] {
   --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
   --secondary-gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
   --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
   --danger-gradient: linear-gradient(135deg, #f43f5e 0%, #dc2626 100%);
-  --dark-bg: #0f172a;
-  --card-bg: #1e293b;
-  --card-bg-light: rgba(255, 255, 255, 0.95);
+  
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e0e7ff;
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #ddd6fe 100%);
+  
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-bg-hover: rgba(255, 255, 255, 0.95);
+  
   --text-primary: #0f172a;
   --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  
   --border-color: #e2e8f0;
+  --border-color-hover: #cbd5e1;
+  
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  --mesh-1: rgba(99, 102, 241, 0.08);
+  --mesh-2: rgba(139, 92, 246, 0.08);
+  --mesh-3: rgba(217, 70, 239, 0.08);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+  --secondary-gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --danger-gradient: linear-gradient(135deg, #f43f5e 0%, #dc2626 100%);
+  
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  
+  --card-bg: rgba(30, 41, 59, 0.85);
+  --card-bg-hover: rgba(30, 41, 59, 0.95);
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  --border-color: #334155;
+  --border-color-hover: #475569;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  
+  --mesh-1: rgba(99, 102, 241, 0.15);
+  --mesh-2: rgba(139, 92, 246, 0.15);
+  --mesh-3: rgba(217, 70, 239, 0.15);
 }
 
 body {
@@ -28,11 +75,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  background: var(--bg-gradient);
   min-height: 100vh;
   padding: 20px;
   position: relative;
   overflow-x: hidden;
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 body::before {
@@ -43,11 +92,21 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 20%, rgba(217, 70, 239, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 20% 50%, var(--mesh-1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, var(--mesh-2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, var(--mesh-3) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
+  animation: meshMove 20s ease-in-out infinite;
+}
+
+@keyframes meshMove {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.1) translate(20px, 20px);
+  }
 }
 
 code {
@@ -68,14 +127,19 @@ code {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
+  background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: var(--primary-gradient);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
 }

@@ -44,16 +44,15 @@ const Home = () => {
         <motion.div 
           className="header-icon"
           animate={{ 
-            rotate: [0, 10, -10, 0],
-            scale: [1, 1.1, 1]
+            y: [-10, 10, -10]
           }}
           transition={{ 
-            duration: 2,
+            duration: 3,
             repeat: Infinity,
-            repeatDelay: 3
+            ease: "easeInOut"
           }}
         >
-          📚
+          ✨
         </motion.div>
         <h1>
           <motion.span
@@ -145,7 +144,7 @@ const Home = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        <p>Powered by Google Gemini AI • Built with React & Node.js By Adit!</p>
+        <p>Powered by Ollama & Mistral 7B • 100% Offline & Private • Built with React & Node.js</p>
       </motion.footer>
     </div>
   );
